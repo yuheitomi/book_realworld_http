@@ -5,6 +5,8 @@ import (
     "log"
     "net/http"
     "net/http/httputil"
+
+    "github.com/k0kubun/pp"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -15,6 +17,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
     }
     fmt.Println(string(dump))
     fmt.Fprintf(w, "<html><body>hello</body></html>\n")
+}
+
+func handlerDigest(w http.ResponseWriter, r *http.Request) {
+    pp.Printf("URL: %s\n", r.URL.String())
+    pp.Printf("Query: %s\n", r.URL.Query());
+
+    defer r.Body.Close()
+    // TODO: unimplemented
 }
 
 func main() {
